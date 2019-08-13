@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<title>RPG Interpreter Test</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/> 
+</h:head>
+<h:body>
+	<h:form>
+
+
+		<h:panelGrid columns="2">
+
+			<h4>Rpgle sources samples:</h4>
+			<h:selectOneMenu value="#{rpgController.rpgPreloaded}">
+				<f:selectItems value="#{rpgController.rpgPreloadedValue}" />
+				<f:ajax listener="#{rpgController.valueChangeMethod}"
+					execute="@form" render="inputText outputText" />
+			</h:selectOneMenu>
+
+			<h4>Paste an rpgle source:</h4>
+			<h:inputTextarea id="inputText" cols="100" rows="25"
+				value="#{rpgController.rpgContent}"></h:inputTextarea>
+
+			<h4>Parameters (pipe separated):</h4>
+			<h:inputText size="100" value="#{rpgController.rpgParmList}"></h:inputText>
+
+			<h4>Actions:</h4>
+			<h:commandButton value="RUN INTERPRETER"
+				actionListener="#{rpgController.interpretate()}">
+				<f:ajax execute="@form" render="outputText elapsedText" />
+			</h:commandButton>
+
+			<h4>Execution time:</h4>
+			<h:outputLabel id="elapsedText" escape="false"
+				value="#{rpgController.elapsedTime}"></h:outputLabel>
+
+			<h4 style="color: blue;">Output:</h4>
+			<h:outputLabel id="outputText"
+				value="#{rpgController.interpretationOutput}" style="color: blue;"></h:outputLabel>
+
+		</h:panelGrid>
+
+	</h:form>
+</h:body>
+</html>
