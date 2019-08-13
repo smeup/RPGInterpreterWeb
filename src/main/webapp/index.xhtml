@@ -11,16 +11,6 @@
 </h:head>
 <h:body>
 	<h:form>
-			<script>
-				window.addEventListener("load", function(){
-					var editorContent = localStorage.getItem("editorContent");
-					if(editorContent){
-						document.getElementsByTagName("textArea")[0].value = editorContent;
-					}
-					localStorage.clear();
-				});
-			</script>
-
 		<h:panelGrid columns="2">
 
 			<h4>Rpgle sources samples:</h4>
