@@ -90,13 +90,13 @@
 		<repository>
 			<id>releases</id>
 			<name>Internal Releases</name>
-			<url>http://mauer.smeup.com/nexus/content/repositories/releases</url>
+			<url>https://mauer.smeup.com/nexus/content/repositories/releases</url>
 		</repository>
 
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>Internal Snapshots</name>
-			<url>http://mauer.smeup.com/nexus/content/repositories/snapshots</url>
+			<url>https://mauer.smeup.com/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
