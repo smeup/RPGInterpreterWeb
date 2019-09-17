@@ -80,7 +80,6 @@ public class RpgController implements Serializable {
 		// load JD_URL commandLineProgram (a java programm called as an RPG from an interpreted RPG)
 		javaSystemInterface.addJavaInteropPackage("com.smeup.jd");
 		commandLineProgram = RunnerKt.getProgram(rpgSource, javaSystemInterface);
-		commandLineProgram.setTraceMode(false);
 
 		List<String> parms = new ArrayList<String>();
 		if (null != getRpgParmList() && !"".equals(getRpgParmList())) {
