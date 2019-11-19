@@ -59,8 +59,8 @@ body.light-theme textarea {
     color: #808080;
 }
 
-body.light-theme .blue-colored {
-    color: #1010ff;
+body.light-theme .accent {
+    color: #000000;
 }
 
 body.light-theme input.btn {
@@ -83,8 +83,8 @@ body.dark-theme textarea {
     color: #ffffff;
 }
 
-body.dark-theme .blue-colored {
-    color: #538dff;
+body.dark-theme .accent {
+    color: #6cf0e2;
 }
 
 body.dark-theme input.btn {
