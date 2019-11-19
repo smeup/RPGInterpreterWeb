@@ -36,32 +36,32 @@
                     <f:ajax onevent="setTheme()"  />
                 </h:selectOneMenu>
 
-                <h4>Rpgle sources samples:</h4>
+                <h4>Rpgle sources samples</h4>
                 <h:selectOneMenu value="#{rpgController.rpgPreloaded}">
                     <f:selectItems value="#{rpgController.rpgPreloadedValue}" />
                     <f:ajax listener="#{rpgController.valueChangeMethod}"
                             execute="@form" render="inputText outputText" />
                 </h:selectOneMenu>
 
-                <h4>Paste an rpgle source:</h4>
+                <h4>Paste an rpgle source</h4>
                 <h:inputTextarea id="inputText" cols="100" rows="25"
                                  value="#{rpgController.rpgContent}"></h:inputTextarea>
 
-                <h4>Parameters (pipe separated):</h4>
+                <h4>Parameters (pipe separated)</h4>
                 <h:inputText size="100" value="#{rpgController.rpgParmList}"></h:inputText>
 
-                <h4>Actions:</h4>
+                <h4>Actions</h4>
                 <h:commandButton value="RUN"
                                  class="btn"
                                  actionListener="#{rpgController.interpretate()}">
                     <f:ajax execute="@form" render="outputText elapsedText" />
                 </h:commandButton>
 
-                <h4>Execution time:</h4>
+                <h4>Execution time</h4>
                 <h:outputLabel id="elapsedText" escape="false"
                                value="#{rpgController.elapsedTime}"></h:outputLabel>
 
-                <h4 class="accent">Output:</h4>
+                <h4 class="accent">Output</h4>
                 <h:outputLabel id="outputText"
                                value="#{rpgController.interpretationOutput}" class="accent"></h:outputLabel>
 
