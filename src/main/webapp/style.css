@@ -29,10 +29,11 @@ textarea, select, input {
 }
 
 input.btn {
-    padding: 8px 12px;
     box-shadow: none;
-    letter-spacing: 1px;
+    cursor: pointer;
     font-size: 110%;
+    letter-spacing: 1px;
+    padding: 8px 12px;
 }
 
 h4 {
