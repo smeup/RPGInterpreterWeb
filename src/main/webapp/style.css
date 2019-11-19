@@ -1,0 +1,92 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19-nov-2019, 12.08.11
+    Author     : luca.foscili
+*/
+
+
+/* G L O B A L */
+* {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    transition: all .25s ease-in;
+}
+
+body {
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+textarea, select, input {
+    border: none;
+    box-shadow: 0px 0px 4px 1px #cfcfcf;
+    padding: 10px;
+}
+
+input.btn {
+    padding: 8px 12px;
+    box-shadow: none;
+    letter-spacing: 1px;
+    font-size: 110%;
+}
+
+h4 {
+    padding: 0 15px;
+}
+
+textarea {     
+    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+}
+
+/* L I G H T */
+body.light-theme {
+    background: #ffffff;
+    color: #808080;
+}
+
+body.light-theme * {
+    background: #ffffff;
+    color: #808080;
+}
+
+body.light-theme textarea {
+    background: #f9f9f9;
+    color: #808080;
+}
+
+body.light-theme .blue-colored {
+    color: #1010ff;
+}
+
+body.light-theme input.btn {
+    background: #e1e1e1;
+}
+
+/* D A R K */
+body.dark-theme {
+    background: #262626;
+    color: #ffffff;
+}
+
+body.dark-theme * {
+    background: #262626;
+    color: #ffffff;
+}
+
+body.dark-theme textarea {
+    background: #2c2c2c;
+    color: #ffffff;
+}
+
+body.dark-theme .blue-colored {
+    color: #538dff;
+}
+
+body.dark-theme input.btn {
+    background: #3f3f3f;
+}
