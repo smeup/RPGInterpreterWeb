@@ -100,6 +100,13 @@
 		</snapshotRepository>
 	</distributionManagement>
 
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>javax.faces</groupId>
@@ -113,11 +120,10 @@
 			<version>8.0</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
-			<groupId>com.github.smeup.smeup-rpg</groupId>
-			<artifactId>rpgJavaInterpreter-core</artifactId>
-			<version>master-SNAPSHOT</version>
+			<groupId>com.github.smeup</groupId>
+			<artifactId>jariko</artifactId>
+			<version>v0.1.4-alpha.1</version>
 		</dependency>
 
 	</dependencies>

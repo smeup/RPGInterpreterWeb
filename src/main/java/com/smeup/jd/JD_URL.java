@@ -22,12 +22,13 @@ import com.smeup.rpgparser.interpreter.Value;
 public class JD_URL implements Program {
 
 	private List<ProgramParam> parms;
+	private boolean varying = false;
 
 	public JD_URL() {
 		parms = new ArrayList<ProgramParam>();
-		parms.add(new ProgramParam("U$FUNZ", new StringType(10)));
-		parms.add(new ProgramParam("U$METO", new StringType(10)));
-		parms.add(new ProgramParam("U$SVARSK", new ArrayType(new StringType(1050), 200, 0)));
+		parms.add(new ProgramParam("U$FUNZ", new StringType(10, varying)));
+		parms.add(new ProgramParam("U$METO", new StringType(10, varying)));
+		parms.add(new ProgramParam("U$SVARSK", new ArrayType(new StringType(1050, varying), 200, 0)));
 	}
 
 	public String urlCall(final String urlToCall) {
@@ -64,7 +65,7 @@ public class JD_URL implements Program {
 		for (Map.Entry<String, ? extends Value> entry : arg1.entrySet()) {
 			if ("U$SVARSK".equals(entry.getKey().toString())) {
 				String response = urlCall(entry.getValue().asString().getValue());
-				arrayListResponse.add(new StringValue(response.trim()));
+				arrayListResponse.add(new StringValue(response.trim(), varying));
 			} else {
 				arrayListResponse.add(entry.getValue());
 			}
