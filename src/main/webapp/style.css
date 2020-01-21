@@ -91,3 +91,7 @@ body.dark-theme .accent {
 body.dark-theme input.btn {
     background: #3f3f3f;
 }
+
+span {
+	font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+}

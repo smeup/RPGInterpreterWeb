@@ -55,9 +55,13 @@
 				<f:ajax listener="#{rpgController.valueChangeMethod}"
 					execute="@form" render="inputText outputText" />
 			</h:selectOneMenu>
+			
+			<h4>Source Headers</h4>
+			<h:outputText escape="false" readonly="true" disabled="true"  id="inputTextHeader" cols="104" rows="4"
+				value="#{rpgController.rpgHeaderContent}"/>
 
 			<h4>Paste an rpgle source</h4>
-			<h:inputTextarea id="inputText" cols="100" rows="25"
+			<h:inputTextarea id="inputText" cols="105" rows="25"
 				value="#{rpgController.rpgContent}"></h:inputTextarea>
 
 			<h4>Parameters (pipe separated)</h4>
@@ -74,7 +78,7 @@
 				value="#{rpgController.elapsedTime}"></h:outputLabel>
 
 			<h4 class="accent">Output</h4>
-			<h:outputLabel id="outputText"
+			<h:outputLabel id="outputText" escape="false"
 				value="#{rpgController.interpretationOutput}" class="accent"></h:outputLabel>
 
 		</h:panelGrid>
