@@ -70,7 +70,7 @@
 			<h4>Actions</h4>
 			<h:commandButton value="RUN" class="btn"
 				actionListener="#{rpgController.interpretate()}">
-				<f:ajax execute="@form" render="outputText elapsedText" />
+				<f:ajax execute="@form" render="elapsedText outputText outputTextMute" />
 			</h:commandButton>
 
 			<h4>Execution time</h4>
@@ -78,8 +78,14 @@
 				value="#{rpgController.elapsedTime}"></h:outputLabel>
 
 			<h4 class="accent">Output</h4>
-			<h:outputLabel id="outputText" escape="false"
-				value="#{rpgController.interpretationOutput}" class="accent"></h:outputLabel>
+			<h:panelGrid columns="2">
+				<h:inputTextarea escape="false" readonly="true" disabled="true" id="outputText" cols="50" rows="5"
+				value="#{rpgController.interpretationOutput}"/>
+				<h:inputTextarea escape="false" readonly="true" disabled="true" id="outputTextMute" cols="50" rows="5"
+				value="#{rpgController.muteOutput}"/>
+			
+			</h:panelGrid>
+
 
 		</h:panelGrid>
 

@@ -39,6 +39,8 @@ public class RpgController implements Serializable {
 	private Intepreter interpreter;
 
 	private String interpretationOutput;
+	private String muteOutput;
+
 	private String rpgPreloaded;
 	private Map<String, Object> rpgPreloadedValues;
 	private String elapsedTime;
@@ -90,15 +92,17 @@ public class RpgController implements Serializable {
 
 	public void interpretate() {
 		Instant beginOperation = Instant.now();
-		String response = interpreter.interpretate(getRpgContent(), getRpgParmList());
+		LinkedHashMap<String, String> results = new LinkedHashMap<String, String>();
+		results = interpreter.interpretate(getRpgContent(), getRpgParmList());
 		Instant endOperation = Instant.now();
 		calculateElapsedTime(beginOperation, endOperation);
-		setInterpretationOutput(response);
+		setInterpretationOutput(results.get("RESPONSE"));
+		setMuteOutput(results.get("MUTERESPONSE"));
 	}
 
 	private void calculateElapsedTime(final Instant beginOperation, final Instant endOperation) {
 		Duration duration = Duration.between(beginOperation, endOperation);
-		setElapsedTime("Started: " + beginOperation.toString() + "<br>Ended: " + endOperation + "<br>Elapsed: "
+		setElapsedTime("Started: " + beginOperation.toString() + " - Ended: " + endOperation + " - Elapsed: "
 				+ humanReadableFormat(duration));
 	}
 
@@ -155,17 +159,17 @@ public class RpgController implements Serializable {
 	}
 
 	private void loadRPGComboSources() {
-		if(rpgPreloadedValues.size() > 1) {
-			return;
-		}
 		rpgPreloadedValues.put("...", "");
 		final URL url = this.getClass().getClassLoader().getResource("rpgle");
 		try (Stream<Path> walk = Files.walk(Paths.get(url.getPath()))) {
 			List<Path> result = walk.filter(Files::isRegularFile).map(x -> x.getFileName()).collect(Collectors.toList());
 			result.forEach( (Path path) -> {
 				try {
-					final String fileName = path.toFile().getName(); 
-					rpgPreloadedValues.put(fileName.substring(0, fileName.length()-6), getRpgleContent(url.getPath() + fileName));
+					String programName = path.toFile().getName();
+					String fileName = url.getPath() + programName;
+					programName = programName.substring(0, programName.length()-6);
+					String programContent = getRpgleContent(fileName);
+					rpgPreloadedValues.put(programName, programContent);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -178,6 +182,14 @@ public class RpgController implements Serializable {
 	
 	private String getRpgleContent(final String rpgleFileName) throws IOException {
 		return new String(Files.readAllBytes(Paths.get(rpgleFileName)));
+	}
+
+	public String getMuteOutput() {
+		return muteOutput;
+	}
+
+	public void setMuteOutput(String muteOutput) {
+		this.muteOutput = muteOutput;
 	}
 
 }

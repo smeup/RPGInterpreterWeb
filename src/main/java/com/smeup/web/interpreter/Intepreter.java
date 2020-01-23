@@ -5,12 +5,17 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
 
 import com.smeup.rpgparser.execution.CommandLineProgram;
 import com.smeup.rpgparser.execution.RunnerKt;
 import com.smeup.rpgparser.jvminterop.JavaSystemInterface;
+import com.smeup.rpgparser.parsing.ast.MuteAnnotationExecuted;
 
 public class Intepreter {
 
@@ -19,7 +24,9 @@ public class Intepreter {
 	private ByteArrayOutputStream byteArrayOutputStream;
 	private PrintStream printStream;
 
-	public String interpretate(final String rpgContent, final String rpgParameters) {
+	public LinkedHashMap<String, String> interpretate(final String rpgContent, final String rpgParameters) {
+		
+		LinkedHashMap<String, String> results = new LinkedHashMap<String, String>();
 		String rpgSource = lineEndingConversion(rpgContent);
 
 		// To handle system.out response
@@ -40,9 +47,24 @@ public class Intepreter {
 
 		commandLineProgram.singleCall(parms);
 		String response = new String(byteArrayOutputStream.toByteArray(), StandardCharsets.UTF_8);
+		String muteResponse = getMuteResults();
+		
 		byteArrayOutputStream.reset();
+		
+		results.put("RESPONSE", response);
+		results.put("MUTERESPONSE", muteResponse);
 
-		return response;
+		return results;
+	}
+	
+	private String getMuteResults() {
+		String muteResults = "";
+		Set<Entry<Integer, MuteAnnotationExecuted>> executedAnnotations = javaSystemInterface.getExecutedAnnotation().entrySet();
+		for (Entry<Integer, MuteAnnotationExecuted> entry : executedAnnotations) {
+			muteResults = muteResults + "Mute annotation at line " + entry.getKey() + " : " + entry.getValue().resultAsString().toUpperCase() + "\n";
+		}
+		System.out.println(muteResults);
+		return muteResults;
 	}
 
 	private String lineEndingConversion(String rpgContent) {
