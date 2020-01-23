@@ -5,12 +5,13 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.TreeMap;
+import java.util.TreeSet;
 
 import com.smeup.rpgparser.execution.CommandLineProgram;
 import com.smeup.rpgparser.execution.RunnerKt;
@@ -59,7 +60,7 @@ public class Intepreter {
 	
 	private String getMuteResults() {
 		String muteResults = "";
-		Set<Entry<Integer, MuteAnnotationExecuted>> executedAnnotations = javaSystemInterface.getExecutedAnnotation().entrySet();
+		Set<Entry<Integer, MuteAnnotationExecuted>> executedAnnotations = javaSystemInterface.getExecutedAnnotation().entrySet();		
 		for (Entry<Integer, MuteAnnotationExecuted> entry : executedAnnotations) {
 			muteResults = muteResults + "Mute annotation at line " + entry.getKey() + " : " + entry.getValue().resultAsString().toUpperCase() + "\n";
 		}
