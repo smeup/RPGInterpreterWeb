@@ -47,22 +47,29 @@ public class RpgController implements Serializable {
 	private Map<String, Object> themePreloadedValues;
 	private String themePreloaded;
 
-	private final String HEADER_CONTENT_01 = "&nbsp.....DName+++++++++++ETDsFrom+++To/L+++IDc.P.chiav.+++++++++++++++++++++++++++++Comments++++++++++++"
+	private final String HEADER_CONTENT_01 = ".....DName+++++++++++ETDsFrom+++To/L+++IDc.P.chiav.+++++++++++++++++++++++++++++Comments++++++++++++"
 			+ "<br>";
-	private final String HEADER_CONTENT_02 = "&nbsp.....CL0N01Factor1+++++++Opcode&ExtFactor2+++++++Result++++++++Len++D+HiLoEq....Comments++++++++++++"
+	private final String HEADER_CONTENT_02 = ".....CL0N01Factor1+++++++Opcode&ExtFactor2+++++++Result++++++++Len++D+HiLoEq....Comments++++++++++++"
 			+ "<br>";
-	private final String HEADER_CONTENT_03 = "&nbsp.....CL0N01Factor1+++++++Opcode&ExtExtended-factor2+++++++++++++++++++++++++++++Comments++++++++++++"
+	private final String HEADER_CONTENT_03 = ".....CL0N01Factor1+++++++Opcode&ExtExtended-factor2+++++++++++++++++++++++++++++Comments++++++++++++"
 			+ "<br>";
-	private final String HEADER_CONTENT_04 = "&nbsp....+... 1 ...+... 2 ...+... 3 ...+... 4 ...+... 5 ...+... 6 ...+... 7 ...+... 8 ...+... 9 ...+... 0";
-	private String rpgHeaderContent;
+	private final String HEADER_CONTENT_04 = " ....+... 1 ...+... 2 ...+... 3 ...+... 4 ...+... 5 ...+... 6 ...+... 7 ...+... 8 ...+... 9 ...+... 0";
+	private String rpgHeaderContent1;
+	private String rpgHeaderContent2;
+	private String rpgHeaderContent3;
+	private String rpgHeaderContent4;
 
 	@PostConstruct
 	public void initPreloadedContent() {
 		rpgPreloadedValues = new LinkedHashMap<String, Object>();
 		themePreloadedValues = new LinkedHashMap<String, Object>();
-		themePreloadedValues.put("Dark", "dark-theme");
-		themePreloadedValues.put("Light", "light-theme");
-		setRpgHeaderContent(HEADER_CONTENT_01 + HEADER_CONTENT_02 + HEADER_CONTENT_03 + HEADER_CONTENT_04);
+		themePreloadedValues.put("Dark theme", "dark-theme");
+		themePreloadedValues.put("Light theme", "light-theme");
+		setRpgHeaderContent1(HEADER_CONTENT_01);
+		setRpgHeaderContent2(HEADER_CONTENT_02);
+		setRpgHeaderContent3(HEADER_CONTENT_03);
+		setRpgHeaderContent4(HEADER_CONTENT_04);
+		
 		loadRPGComboSources();
 	}
 
@@ -150,16 +157,8 @@ public class RpgController implements Serializable {
 		return elapsedTime;
 	}
 
-	public String getRpgHeaderContent() {
-		return rpgHeaderContent;
-	}
-
-	public void setRpgHeaderContent(String rpgHeaderContent) {
-		this.rpgHeaderContent = rpgHeaderContent;
-	}
-
 	private void loadRPGComboSources() {
-		rpgPreloadedValues.put("...", "");
+		rpgPreloadedValues.put("RPG source selection...", "");
 		final URL url = this.getClass().getClassLoader().getResource("rpgle");
 		try (Stream<Path> walk = Files.walk(Paths.get(url.getPath()))) {
 			List<Path> result = walk.filter(Files::isRegularFile).map(x -> x.getFileName()).collect(Collectors.toList());
@@ -190,6 +189,38 @@ public class RpgController implements Serializable {
 
 	public void setMuteOutput(String muteOutput) {
 		this.muteOutput = muteOutput;
+	}
+
+	public String getRpgHeaderContent1() {
+		return rpgHeaderContent1;
+	}
+
+	public void setRpgHeaderContent1(String rpgHeaderContent1) {
+		this.rpgHeaderContent1 = rpgHeaderContent1;
+	}
+
+	public String getRpgHeaderContent2() {
+		return rpgHeaderContent2;
+	}
+
+	public void setRpgHeaderContent2(String rpgHeaderContent2) {
+		this.rpgHeaderContent2 = rpgHeaderContent2;
+	}
+
+	public String getRpgHeaderContent3() {
+		return rpgHeaderContent3;
+	}
+
+	public void setRpgHeaderContent3(String rpgHeaderContent3) {
+		this.rpgHeaderContent3 = rpgHeaderContent3;
+	}
+
+	public String getRpgHeaderContent4() {
+		return rpgHeaderContent4;
+	}
+
+	public void setRpgHeaderContent4(String rpgHeaderContent4) {
+		this.rpgHeaderContent4 = rpgHeaderContent4;
 	}
 
 }

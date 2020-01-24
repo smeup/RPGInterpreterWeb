@@ -58,6 +58,10 @@ body.light-theme * {
 body.light-theme textarea {
     background: #f9f9f9;
     color: #808080;
+        	background: url(http://i.imgur.com/2cOaJ.png);
+    background-attachment: local;
+    background-repeat: no-repeat;
+    padding-left: 35px;
 }
 
 body.light-theme .accent {
@@ -82,6 +86,10 @@ body.dark-theme * {
 body.dark-theme textarea {
     background: #2c2c2c;
     color: #ffffff;
+    	background: url(http://i.imgur.com/2cOaJ.png);
+    background-attachment: local;
+    background-repeat: no-repeat;
+    padding-left: 35px;
 }
 
 body.dark-theme .accent {
@@ -94,4 +102,5 @@ body.dark-theme input.btn {
 
 span {
 	font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+	padding-left: 32px;
 }

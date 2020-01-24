@@ -3,7 +3,8 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<title>RPG Interpreter Test</title>
@@ -14,78 +15,95 @@
 <h:body class="dark-theme">
 	<h:form>
 		<script>
-                window.addEventListener("load", function () {
-                    var editorContent = localStorage.getItem("editorContent");
-                    if (editorContent) {
-                        document.getElementsByTagName("textArea")[0].value = editorContent;
-                    }
-                    localStorage.clear();
-                    curlSampleText();
-                });
+			window
+					.addEventListener(
+							"load",
+							function() {
+								var editorContent = localStorage
+										.getItem("editorContent");
+								if (editorContent) {
+									document.getElementsByTagName("textArea")[0].value = editorContent;
+								}
+								localStorage.clear();
+								curlSampleText();
+							});
 
-                function setTheme() {
-                    let theme = document.querySelector('.theme-selector').value;
-                    document.querySelector('body').className = theme;
-                }
-                
-    			function curlSampleText(){
-    				var location = window.location.href;
-    				var text = "(curl sample: curl --data-urlencode rpgSource=\"$(cat '/home/tron/rpg/CALCFIB.rpgle')\" --data-binary rpgParms=\"10\" -X POST " + location + "interpretate.xhtml )";
-    				document.getElementById("curlSample").innerHTML = text;
-    				var codeLine1 = "     D Msg             S             12    			     " + "\n"
-    				var codeLine2 = "     C                   Eval      Msg  = 'Hello World!'     			         "  + "\n"
-    				var codeLine3 = "     C                   dsply                   Msg    			         "  + "\n"
-    				var codeLine4 = "     C                   SETON                                          LR";
-    				var code = codeLine1 + codeLine2 + codeLine3 + codeLine4; 
-    				document.getElementById("curlSample").title = "Instead of rpgle file, you can set the 'rpgSource' variable content with rpgle source code: \n rpgSource=\" " + code + "\"";
-    			}
-         </script>
+			function setTheme() {
+				let theme = document.querySelector('.theme-selector').value;
+				document.querySelector('body').className = theme;
+			}
 
-		<h:panelGrid columns="2">
-			<h4>Theme</h4>
-			<h:selectOneMenu class="theme-selector"
-				value="#{rpgController.themePreloaded}">
-				<f:selectItems value="#{rpgController.themePreloadedValue}" />
-				<f:ajax onevent="setTheme()" />
-			</h:selectOneMenu>
+			function curlSampleText() {
+				var location = window.location.href;
+				var text = "(curl sample: curl --data-urlencode rpgSource=\"$(cat '/home/tron/rpg/CALCFIB.rpgle')\" --data-binary rpgParms=\"10\" -X POST "
+						+ location + "interpretate.xhtml )";
+				document.getElementById("curlSample").innerHTML = text;
+				var codeLine1 = "     D Msg             S             12    			     "
+						+ "\n"
+				var codeLine2 = "     C                   Eval      Msg  = 'Hello World!'     			         "
+						+ "\n"
+				var codeLine3 = "     C                   dsply                   Msg    			         "
+						+ "\n"
+				var codeLine4 = "     C                   SETON                                          LR";
+				var code = codeLine1 + codeLine2 + codeLine3 + codeLine4;
+				document.getElementById("curlSample").title = "Instead of rpgle file, you can set the 'rpgSource' variable content with rpgle source code: \n rpgSource=\" "
+						+ code + "\"";
+			}
+		</script>
 
-			<h4>Rpgle sources samples</h4>
-			<h:selectOneMenu value="#{rpgController.rpgPreloaded}">
-				<f:selectItems value="#{rpgController.rpgPreloadedValue}" />
-				<f:ajax listener="#{rpgController.valueChangeMethod}"
-					execute="@form" render="inputText outputText" />
-			</h:selectOneMenu>
-			
-			<h4>Source Headers</h4>
-			<h:outputText escape="false" readonly="true" disabled="true"  id="inputTextHeader" cols="104" rows="4"
-				value="#{rpgController.rpgHeaderContent}"/>
+		<h:panelGrid columns="1">
+		
+			<h:panelGrid columns="2">
+				<h:selectOneMenu value="#{rpgController.rpgPreloaded}">
+					<f:selectItems value="#{rpgController.rpgPreloadedValue}" />
+					<f:ajax listener="#{rpgController.valueChangeMethod}"
+						execute="@form" render="inputText outputText" />
+				</h:selectOneMenu>
+				<h:selectOneMenu class="theme-selector"
+					value="#{rpgController.themePreloaded}">
+					<f:selectItems value="#{rpgController.themePreloadedValue}" />
+					<f:ajax onevent="setTheme()" />
+				</h:selectOneMenu>
+			</h:panelGrid>
 
-			<h4>Paste an rpgle source</h4>
-			<h:inputTextarea id="inputText" cols="105" rows="25"
+			<h:panelGrid columns="1">
+				<h:outputText escape="false" readonly="true" disabled="true"
+					id="inputTextHeader1" cols="105" rows="4"
+					value="#{rpgController.rpgHeaderContent1}" />
+				<h:outputText escape="false" readonly="true" disabled="true"
+					id="inputTextHeader2" cols="105" rows="4"
+					value="#{rpgController.rpgHeaderContent2}" />
+				<h:outputText escape="false" readonly="true" disabled="true"
+					id="inputTextHeader3" cols="105" rows="4"
+					value="#{rpgController.rpgHeaderContent3}" />
+				<h:outputText escape="false" readonly="true" disabled="true"
+					id="inputTextHeader4" cols="105" rows="4"
+					value="#{rpgController.rpgHeaderContent4}" />
+			</h:panelGrid>
+
+			<h:inputTextarea pt:placeholder="Choose or paste RPG source code" id="inputText" cols="107" rows="30"
 				value="#{rpgController.rpgContent}"></h:inputTextarea>
 
-			<h4>Parameters (pipe separated)</h4>
-			<h:inputText size="100" value="#{rpgController.rpgParmList}"></h:inputText>
+			<h:panelGrid columns="2">
+				<h:inputText pt:placeholder="Pipe-separated parameters (if any)" size="100" value="#{rpgController.rpgParmList}"></h:inputText>
+				<h:commandButton value="RUN" class="btn" icon="mdi mdi-play"
+					actionListener="#{rpgController.interpretate()}">
+					<f:ajax execute="@form"
+						render="elapsedText outputText outputTextMute" />
+				</h:commandButton>
+			</h:panelGrid>
 
-			<h4>Actions</h4>
-			<h:commandButton value="RUN" class="btn"
-				actionListener="#{rpgController.interpretate()}">
-				<f:ajax execute="@form" render="elapsedText outputText outputTextMute" />
-			</h:commandButton>
-
-			<h4>Execution time</h4>
 			<h:outputLabel id="elapsedText" escape="false"
 				value="#{rpgController.elapsedTime}"></h:outputLabel>
 
-			<h4 class="accent">Output</h4>
 			<h:panelGrid columns="2">
-				<h:inputTextarea escape="false" readonly="true" disabled="true" id="outputText" cols="50" rows="5"
-				value="#{rpgController.interpretationOutput}"/>
-				<h:inputTextarea escape="false" readonly="true" disabled="true" id="outputTextMute" cols="50" rows="5"
-				value="#{rpgController.muteOutput}"/>
-			
+				<h:inputTextarea pt:placeholder="stdout" escape="false" readonly="true" disabled="true"
+					id="outputText" cols="50" rows="7"
+					value="#{rpgController.interpretationOutput}" />
+				<h:inputTextarea pt:placeholder="MUTE annotations results" escape="false" readonly="true" disabled="true"
+					id="outputTextMute" cols="50" rows="7"
+					value="#{rpgController.muteOutput}" />
 			</h:panelGrid>
-
 
 		</h:panelGrid>
 
