@@ -10,9 +10,12 @@ and open the template in the editor.
 
 
 /* G L O B A L */
+html {
+    font-size: 14px;
+}
+
 * {
     font-family: Roboto, sans-serif;
-    font-size: 14px;
     transition: all .25s ease-in;
 }
 
@@ -40,7 +43,9 @@ h4 {
     padding: 0 15px;
 }
 
-textarea {     
+textarea, span {     
+    font-size: 14px;
+    line-height: 1.2;
     font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
 }
 
@@ -101,6 +106,5 @@ body.dark-theme input.btn {
 }
 
 span {
-	font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
 	padding-left: 32px;
 }
