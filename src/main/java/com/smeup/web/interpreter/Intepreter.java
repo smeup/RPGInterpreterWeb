@@ -3,15 +3,16 @@ package com.smeup.web.interpreter;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.TreeSet;
+
+import javax.inject.Inject;
 
 import com.smeup.rpgparser.execution.CommandLineProgram;
 import com.smeup.rpgparser.execution.RunnerKt;
@@ -20,6 +21,9 @@ import com.smeup.rpgparser.parsing.ast.MuteAnnotationExecuted;
 
 public class Intepreter {
 
+	@Inject
+	private RpgController rpgController;
+	
 	private CommandLineProgram commandLineProgram;
 	private JavaSystemInterface javaSystemInterface;
 	private ByteArrayOutputStream byteArrayOutputStream;
@@ -38,15 +42,20 @@ public class Intepreter {
 		// load JD_URL commandLineProgram (a java programm called as an RPG from an
 		// interpreted RPG)
 		javaSystemInterface.addJavaInteropPackage("com.smeup.jd");
-		commandLineProgram = RunnerKt.getProgram(rpgSource, javaSystemInterface);
-
 		List<String> parms = new ArrayList<String>();
 		if (null != rpgParameters && !"".equals(rpgParameters)) {
 			String[] splitted = rpgParameters.split("\\|");
 			parms = Arrays.asList(splitted);
 		}
-
+		
+		Instant beginOperation = Instant.now();
+		commandLineProgram = RunnerKt.getProgram(rpgSource, javaSystemInterface);
+		Instant endOperation = Instant.now();
+		beginOperation = Instant.now();
 		commandLineProgram.singleCall(parms);
+		endOperation = Instant.now();
+		
+		rpgController.calculateElapsedTime(beginOperation, endOperation);
 		String response = new String(byteArrayOutputStream.toByteArray(), StandardCharsets.UTF_8);
 		String muteResponse = getMuteResults();
 		

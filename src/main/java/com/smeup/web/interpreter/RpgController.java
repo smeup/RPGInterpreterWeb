@@ -98,16 +98,13 @@ public class RpgController implements Serializable {
 	}
 
 	public void interpretate() {
-		Instant beginOperation = Instant.now();
 		LinkedHashMap<String, String> results = new LinkedHashMap<String, String>();
 		results = interpreter.interpretate(getRpgContent(), getRpgParmList());
-		Instant endOperation = Instant.now();
-		calculateElapsedTime(beginOperation, endOperation);
 		setInterpretationOutput(results.get("RESPONSE"));
 		setMuteOutput(results.get("MUTERESPONSE"));
 	}
 
-	private void calculateElapsedTime(final Instant beginOperation, final Instant endOperation) {
+	protected void calculateElapsedTime(final Instant beginOperation, final Instant endOperation) {
 		Duration duration = Duration.between(beginOperation, endOperation);
 		setElapsedTime("Started: " + beginOperation.toString() + " - Ended: " + endOperation + " - Elapsed: "
 				+ humanReadableFormat(duration));
