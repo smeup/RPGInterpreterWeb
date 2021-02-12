@@ -1,6 +1,7 @@
 package com.smeup.web.interpreter;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
@@ -14,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIOutput;
@@ -160,14 +160,16 @@ public class RpgController implements Serializable {
 	private void loadRPGComboSources() {
 		rpgPreloadedValues.put("RPG source selection...", "");
 		final URL url = this.getClass().getClassLoader().getResource("rpgle");
-		try (Stream<Path> walk = Files.walk(Paths.get(url.getPath()))) {
+        // fixed issue on windows platform
+		try (Stream<Path> walk = Files.walk(Paths.get(new File(url.getPath()).getAbsolutePath()))) {
 			List<Path> result = walk.filter(Files::isRegularFile).map(x -> x.getFileName()).collect(Collectors.toList());
 			result.forEach( (Path path) -> {
 				try {
 					String programName = path.toFile().getName();
 					String fileName = url.getPath() + programName;
 					programName = programName.substring(0, programName.length()-6);
-					String programContent = getRpgleContent(fileName);
+                    // fixed issue on windows platform
+					String programContent = getRpgleContent(new File(fileName).getAbsolutePath());
 					rpgPreloadedValues.put(programName, programContent);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
