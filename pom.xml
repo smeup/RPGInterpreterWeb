@@ -120,11 +120,11 @@
 			<version>8.0</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.github.smeup</groupId>
-			<artifactId>jariko</artifactId>
-			<version>v0.1.4</version>
-		</dependency>
+                <dependency>
+                         <groupId>com.github.smeup.jariko</groupId>
+                         <artifactId>rpgJavaInterpreter-core</artifactId>
+                         <version>-SNAPSHOT</version>
+                </dependency>
 
 	</dependencies>
 </project>
