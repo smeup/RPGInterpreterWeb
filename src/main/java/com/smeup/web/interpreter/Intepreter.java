@@ -5,13 +5,11 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.TreeSet;
 
 import com.smeup.rpgparser.execution.CommandLineProgram;
 import com.smeup.rpgparser.execution.RunnerKt;
